@@ -11,8 +11,7 @@ capture.set(cv2.CAP_PROP_FPS, 30)  # Requesting 30 FPS from the camera
 bg_subtractor = cv2.createBackgroundSubtractorMOG2()
  
 # Current mode
-mode = "normal"
- 
+mode = "normal" 
 # FPS calculation
 prev_time = time.time()
  

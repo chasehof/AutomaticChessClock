@@ -1,0 +1,63 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="Page-1" id="9Q8LENdDzrr02iNyE3n-">
+    <mxGraphModel dx="1901" dy="2251" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-3" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Pi 4 Model B" vertex="1">
+          <mxGeometry height="370" width="370" x="240" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-6" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Ethernet" vertex="1">
+          <mxGeometry height="80" width="80" x="530" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-7" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="2x USB 2.0" vertex="1">
+          <mxGeometry height="80" width="80" x="240" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-8" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;ul style=&quot;border: 0px solid; box-sizing: inherit; margin: 0px 0px 1em 20px; padding: 0px; list-style: none; line-height: 1.5; color: rgb(34, 34, 34); font-family: Roboto, ui-sans-serif, system-ui, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;&lt;li style=&quot;border: 0px solid; box-sizing: inherit; margin: 0px; padding: 0px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;2-lane MIPI CSI camera port&lt;/font&gt;&lt;/li&gt;&lt;li style=&quot;font-size: 18px;&quot;&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="90" width="90" x="520" y="-510" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;direction=south;" value="GPIO" vertex="1">
+          <mxGeometry height="120" width="60" x="550" y="-660" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-18" edge="1" parent="1" source="QGVbIYMNwfJWjeQ6yVTC-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="QGVbIYMNwfJWjeQ6yVTC-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-11" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;ul style=&quot;border: 0px solid; box-sizing: inherit; margin: 0px 0px 1em 20px; padding: 0px; list-style: none; line-height: 1.5; color: rgb(34, 34, 34); font-family: Roboto, ui-sans-serif, system-ui, sans-serif; background-color: rgb(255, 255, 255);&quot;&gt;&lt;li style=&quot;text-align: left; border: 0px solid; box-sizing: inherit; margin: 0px; padding: 0px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;2-lane MIPI DSI display port&lt;/font&gt;&lt;/li&gt;&lt;li style=&quot;font-size: 18px;&quot;&gt;&lt;/li&gt;&lt;/ul&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="420" y="-500" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-12" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="USB C Power Supply" vertex="1">
+          <mxGeometry height="80" width="80" x="240" y="-500" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-13" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="2xUSB 3.0" vertex="1">
+          <mxGeometry height="80" width="80" x="385" y="-790" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-14" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="2xMicro HDMI" vertex="1">
+          <mxGeometry height="80" width="80" x="240" y="-660" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-15" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Raspberry Pi Camera Module" vertex="1">
+          <mxGeometry height="80" width="80" x="525" y="-300" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-16" edge="1" parent="1" source="QGVbIYMNwfJWjeQ6yVTC-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="QGVbIYMNwfJWjeQ6yVTC-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-17" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Display" vertex="1">
+          <mxGeometry height="80" width="80" x="420" y="-300" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-20" edge="1" parent="1" source="QGVbIYMNwfJWjeQ6yVTC-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="QGVbIYMNwfJWjeQ6yVTC-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-19" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="External 5 Volt Wall outlet /Battery Power Pack" vertex="1">
+          <mxGeometry height="80" width="80" x="240" y="-300" as="geometry" />
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-22" edge="1" parent="1" source="QGVbIYMNwfJWjeQ6yVTC-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="QGVbIYMNwfJWjeQ6yVTC-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="-609.6190476190477" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QGVbIYMNwfJWjeQ6yVTC-21" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="External Buttons for Interaction with Device" vertex="1">
+          <mxGeometry height="60" width="120" x="710" y="-630" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
