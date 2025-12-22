@@ -58,7 +58,7 @@ struct MoveEvent {
  * Event representing a stability measurement for a square. Stability is used
  * by the FSM to confirm that transient motion has settled before confirming a move.
  */
-struct StabilityEvent {
+struct MoveConfirmedEvent {
     SquareCoordinates coordinates; /**< Square being monitored for stability */
     ClockTime timestamp;           /**< Time when stability was measured */
     bool isStable;                 /**< True if the square remained stable */

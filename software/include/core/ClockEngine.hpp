@@ -67,7 +67,7 @@ private:
 
     PlayerColor m_activePlayer{ PlayerColor::WHITE }; /**< Currently active player */
 
-    std::atomic<bool> m_isRunning{ false }; /**< Atomic running flag for thread-safety */
+    bool m_isRunning{ false }; /**< Running flag for the clock engine */
 
     std::chrono::steady_clock::time_point m_lastUpdateTime; /**< Last time update() ran */
 
