@@ -23,8 +23,8 @@ enum class Occupancy {
  * Strongly-typed player color.
  */
 enum class PlayerColor {
-    WHITE, /**< White player */
-    BLACK  /**< Black player */
+    WHITE = 0, /**< White player */
+    BLACK = 1  /**< Black player */
 };
 
 /**
@@ -68,8 +68,8 @@ struct MoveConfirmedEvent {
  * Snapshot of the clock state exposed to the UI or for logging.
  */
 struct ClockState {
-    std::chrono::milliseconds whiteTimeRemaining; /**< White player's remaining time */
-    std::chrono::milliseconds blackTimeRemaining; /**< Black player's remaining time */
+    std::chrono::milliseconds whiteTimeRemaining;  /**< White player's remaining time */
+    std::chrono::milliseconds blackTimeRemaining;  /**< Black player's remaining time */
     PlayerColor activePlayer;                      /**< Which player is currently active */
     bool isGameOver;                               /**< True when the game is finished */
 };
