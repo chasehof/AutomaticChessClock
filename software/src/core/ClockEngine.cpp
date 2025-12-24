@@ -1,17 +1,14 @@
 #include "ClockEngine.hpp"
 
-
 namespace ChessClock {
 
 ClockEngine::ClockEngine(const Config& config)
-    : m_initialTime(config.initialTime),
-      m_incrementPerMove(config.incrementPerMove),
-      m_config(config),
+    : m_config(config),
 
 {
-    m_timeRemaining[static_cast<int>(PlayerColor::WHITE)] = m_initialTime;
-    m_timeRemaining[static_cast<int>(PlayerColor::BLACK)] = m_initialTime;
-   
+    m_timeRemaining[static_cast<int>(PlayerColor::WHITE)] = m_config.initialTime;
+    m_timeRemaining[static_cast<int>(PlayerColor::BLACK)] = m_config.initialTime;
+
 }
 
 void ClockEngine::start() {
@@ -43,6 +40,8 @@ void ClockEngine::update() {
 
 
 void ClockEngine::onMoveConfirmed(const MoveConfirmedEvent& event) {
+    update(); // Update time before processing move
+
     // Apply increment to the player who just moved
     applyIncrement(m_activePlayer);
 

@@ -69,7 +69,7 @@ private:
 
     bool m_isRunning{ false }; /**< Running flag for the clock engine */
 
-    std::chrono::steady_clock::time_point m_lastUpdateTime; /**< Last time update() ran */
+    std::chrono::steady_clock::time_point m_lastUpdateTime{}; /**< Last time update() ran */
 
     /**
      * Apply the configured increment to the given player.

@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <vector>
+#include <optional>
 
 namespace ChessClock {
 
@@ -54,12 +55,18 @@ struct MoveEvent {
     Occupancy occupancy;           /**< New occupancy value for the square */
 };
 
+
+struct MoveConfirmedEvent {
+    SquareCoordinates source;      /**< Source square of the confirmed move */
+    SquareCoordinates destination; /**< Destination square of the confirmed move */
+    ClockTime timestamp;           /**< Time when the move was confirmed */
+};
+
 /**
  * Event representing a stability measurement for a square. Stability is used
  * by the FSM to confirm that transient motion has settled before confirming a move.
  */
-struct MoveConfirmedEvent {
-    SquareCoordinates coordinates; /**< Square being monitored for stability */
+struct StabilityEvent {
     ClockTime timestamp;           /**< Time when stability was measured */
     bool isStable;                 /**< True if the square remained stable */
 };

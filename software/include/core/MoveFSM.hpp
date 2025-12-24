@@ -4,6 +4,10 @@
 #include <vector>
 #include <optional>
 #include <functional>
+#include <set>
+#include <array>
+
+namespace ChessClock {
 
 /**
  * Move finite-state machine (FSM) responsible for interpreting low-level
@@ -74,6 +78,37 @@ private:
     std::optional<SquareCoordinates> m_sourceSquare;      /**< Detected source square */
     std::optional<SquareCoordinates> m_destinationSquare; /**< Detected destination square */
 
+
+    std::set<SquareCoordinates> m_emptiedSquares;   /**< Set of currently lifted pieces */
+    std::set<SquareCoordinates> m_occupiedSquares;  /**< Set of currently placed pieces */
+
+    /**
+     * Last known stable board occupancy. Used to compute diffs when the
+     * board becomes stable so we can classify special moves (castling,
+     * promotion, en-passant) using a board-level snapshot.
+     */
+    std::array<Occupancy, 64> m_lastStableBoard{};
+
+    /**
+     * Small candidate returned by the classifier when a plausible source/
+     * destination pair is found. This is intentionally minimal: timestamp
+     * and callback emission remain the responsibility of the FSM transition
+     * path.
+     */
+    struct MoveCandidate {
+        SquareCoordinates source;
+        SquareCoordinates destination;
+    };
+
+    /**
+     * Classify the diff between prev and curr stable boards and produce a
+     * MoveCandidate (source/destination) if a plausible move can be determined.
+     * The classifier does not emit callbacks or create MoveConfirmedEvent; it
+     * only suggests a source/destination pair.
+     */
+    std::optional<MoveCandidate> classifyBoardDiff(const std::array<Occupancy,64>& prev,
+                                                   const std::array<Occupancy,64>& curr) const;
+
     /**
      * Handle an incoming MoveEvent while in the IDLE state.
      */
@@ -101,3 +136,5 @@ private:
      */
     void transitionToState(State newState);
 };
+
+} // namespace ChessClock
