@@ -18,7 +18,7 @@ set(AC_PERCEPTION_SOURCES
 )
 
 set(QT_SOURCES
-    src/ui/main.cpp
+    src/main.cpp
     src/ui/TimeWindow.cpp
 )
 
