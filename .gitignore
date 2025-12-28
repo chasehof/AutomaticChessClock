@@ -1,3 +1,73 @@
+# Build directories
+/build/
+/build-*/
+
+# CMake artifacts
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+/compile_commands.json
+
+# Object and library files
+*.o
+*.obj
+*.lo
+*.la
+*.al
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+
+# Binaries (project-specific)
+/software/automatic_chess_clock
+/build/**/automatic_chess_clock
+
+# Editor and IDE directories
+.vscode/
+.idea/
+.cache/
+.vs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.swp
+*.tmp
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+.env
+
+# Node
+node_modules/
+dist/
+
+# Packages
+*.egg-info/
+
+# Coverage
+coverage/
+
+# CMake user presets (local overrides)
+/CMakeUserPresets.json
+
+# OpenCV local build artifacts
+/opencv/build/
+
+# Misc
+.idea/
+*.iml
 # Prerequisites
 *.d
 
