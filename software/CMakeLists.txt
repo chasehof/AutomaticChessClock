@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 
+# Enable Qt auto tools
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 ## Project targets for the software subdirectory
 
 ## Sources
@@ -10,6 +15,15 @@ set(AC_CORE_SOURCES
 
 set(AC_PERCEPTION_SOURCES
     src/perception/OpenCVPerceptionEngine.cpp
+)
+
+set(QT_SOURCES
+    src/ui/main.cpp
+    src/ui/TimeWindow.cpp
+)
+
+set(QT_HEADERS
+    include/ui/TimeWindow.h
 )
 
 ## Public include root and subfolders (headers are organized into subdirs)
@@ -31,6 +45,9 @@ else()
     message(WARNING "OpenCV not found: perception module will be disabled. To enable, install OpenCV or set OpenCV_DIR.")
     set(BUILD_PERCEPTION OFF)
 endif()
+
+# Find Qt5
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 ## Libraries
 add_library(ac_core STATIC ${AC_CORE_SOURCES})
@@ -63,6 +80,14 @@ add_executable(automatic_chess_clock
 target_include_directories(automatic_chess_clock PRIVATE ${AC_PUBLIC_INCLUDE_DIR})
 target_link_libraries(automatic_chess_clock PRIVATE ac_core ac_perception)
 
+add_executable(TimeApp
+    ${QT_SOURCES}
+    ${QT_HEADERS}
+)
+# Link Qt
+target_link_libraries(TimeApp
+    Qt5::Widgets
+)
 ## Install / export (optional)
 install(TARGETS ac_core ac_perception automatic_chess_clock
         RUNTIME DESTINATION bin
