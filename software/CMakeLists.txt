@@ -23,7 +23,7 @@ set(QT_SOURCES
 )
 
 set(QT_HEADERS
-    include/ui/TimeWindow.h
+    include/ui/TimeWindow.hpp
 )
 
 ## Public include root and subfolders (headers are organized into subdirs)
