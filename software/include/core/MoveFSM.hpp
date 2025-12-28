@@ -52,10 +52,11 @@ public:
     void processMoveEvent(const MoveEvent& event);
 
     /**
-     * Process a stability measurement for a square. Stability events are
-     * used to filter transient motion and to confirm placement.
+     * Process a stability measurement for the board. Stability events indicate
+     * that the whole board has been observed as stable for the configured
+     * threshold and are used to confirm placement and finalize moves.
      *
-     * @param event StabilityEvent describing the square and stability flag.
+     * @param event StabilityEvent describing the stability measurement (board-level).
      */
     void processStabilityEvent(const StabilityEvent& event);
 
@@ -87,7 +88,8 @@ private:
      * board becomes stable so we can classify special moves (castling,
      * promotion, en-passant) using a board-level snapshot.
      */
-    std::array<Occupancy, 64> m_lastStableBoard{};
+    // m_lastStableBoard removed; perception now provides prev/curr snapshots
+    // via StabilityEvent to avoid duplicate board storage across modules.
 
     /**
      * Small candidate returned by the classifier when a plausible source/

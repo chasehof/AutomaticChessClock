@@ -1,0 +1,74 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "host-debug",
+      "displayName": "Host Debug (Unix Makefiles)",
+      "description": "Configure for local host build (Debug)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/host-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "AC_PREFER_STATIC": "ON",
+        "AC_STATIC_RUNTIME": "OFF"
+      }
+    },
+    {
+      "name": "host-release",
+      "displayName": "Host Release",
+      "description": "Configure for local host build (RelWithDebInfo)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/host-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "AC_PREFER_STATIC": "ON",
+        "AC_STATIC_RUNTIME": "OFF"
+      }
+    },
+    {
+      "name": "armhf-release",
+      "displayName": "armhf (32-bit ARM) RelWithDebInfo",
+      "description": "Cross-configure for 32-bit ARM (armhf) using toolchain file",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/armhf",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "AC_PREFER_STATIC": "ON",
+        "AC_STATIC_RUNTIME": "OFF",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/armhf.cmake"
+      }
+    },
+    {
+      "name": "aarch64-release",
+      "displayName": "aarch64 (64-bit ARM) RelWithDebInfo",
+      "description": "Cross-configure for aarch64 using toolchain file",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/aarch64",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "AC_PREFER_STATIC": "ON",
+        "AC_STATIC_RUNTIME": "OFF",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/aarch64.cmake"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "host-release",
+      "description": "Build the default configured project",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "host-debug-build",
+      "configurePreset": "host-debug",
+      "description": "Build host debug preset",
+      "configuration": "Debug"
+    }
+  ]
+}

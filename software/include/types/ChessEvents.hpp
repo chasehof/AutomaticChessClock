@@ -4,6 +4,7 @@
 #include <chrono>
 #include <vector>
 #include <optional>
+#include <array>
 
 namespace ChessClock {
 
@@ -69,7 +70,21 @@ struct MoveConfirmedEvent {
 struct StabilityEvent {
     ClockTime timestamp;           /**< Time when stability was measured */
     bool isStable;                 /**< True if the square remained stable */
+    std::array<Occupancy, 64> prev; /**< Previous stable board snapshot */
+    std::array<Occupancy, 64> curr; /**< Current stable board snapshot */
 };
+
+/**
+ * Unified perception event for consumers. Preserves ordering of move and
+ * stability notifications from the perception engine. Consumers can switch
+ * on the kind field to handle the payload appropriately.
+ */
+struct PerceptionEvent {
+    enum class Kind { Move, Stability } kind;
+    MoveEvent move;         /**< Valid when kind==Move */
+    StabilityEvent stable;  /**< Valid when kind==Stability */
+};
+ 
 
 /**
  * Snapshot of the clock state exposed to the UI or for logging.
@@ -82,6 +97,12 @@ struct ClockState {
 };
 
 
+enum class PerceptionState {
+    UNINITIALIZED, /**< Perception engine is not initialized */
+    CALIBRATING,   /**< Perception engine is in calibration mode */
+    RUNNING,       /**< Perception engine is actively processing */
+    ERROR          /**< Perception engine has encountered an error */
+};
 
 
 } // namespace ChessClock

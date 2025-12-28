@@ -3,12 +3,10 @@
 namespace ChessClock {
 
 ClockEngine::ClockEngine(const Config& config)
-    : m_config(config),
-
+    : m_config(config)
 {
     m_timeRemaining[static_cast<int>(PlayerColor::WHITE)] = m_config.initialTime;
     m_timeRemaining[static_cast<int>(PlayerColor::BLACK)] = m_config.initialTime;
-
 }
 
 void ClockEngine::start() {
@@ -55,11 +53,11 @@ void ClockEngine::onMoveConfirmed(const MoveConfirmedEvent& event) {
 
 ClockState ClockEngine::getState() const {
     return ClockState{
-        .whiteTimeRemaining = m_timeRemaining[static_cast<int>(PlayerColor::WHITE)],
-        .blackTimeRemaining = m_timeRemaining[static_cast<int>(PlayerColor::BLACK)],
-        .activePlayer = m_activePlayer,
-        .isGameOver = m_timeRemaining[static_cast<int>(PlayerColor::WHITE)] <= std::chrono::milliseconds(0) ||
-                        m_timeRemaining[static_cast<int>(PlayerColor::BLACK)] <= std::chrono::milliseconds(0)
+        m_timeRemaining[static_cast<int>(PlayerColor::WHITE)],
+        m_timeRemaining[static_cast<int>(PlayerColor::BLACK)],
+        m_activePlayer,
+        (m_timeRemaining[static_cast<int>(PlayerColor::WHITE)] <= std::chrono::milliseconds(0) ||
+         m_timeRemaining[static_cast<int>(PlayerColor::BLACK)] <= std::chrono::milliseconds(0))
     };
 }
 

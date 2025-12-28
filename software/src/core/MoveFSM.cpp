@@ -7,49 +7,39 @@ namespace ChessClock {
 
 MoveFSM::MoveFSM(MoveConfirmedCallback callback)
         : m_moveConfirmedCallback(std::move(callback)),
-            m_currentState(State::IDLE) {
+            m_currentState(MoveFSM::State::IDLE) {
 }
 
 
 void MoveFSM::processMoveEvent(const MoveEvent& event) {
     switch (m_currentState) {
-        case State::IDLE:
+        case MoveFSM::State::IDLE:
             handleIdleState(event);
             break;
-        case State::PIECE_LIFTED:
+        case MoveFSM::State::PIECE_LIFTED:
             handlePieceLiftedState(event);
             break;
-        case State::PIECE_PLACED:
+        case MoveFSM::State::PIECE_PLACED:
             handlePiecePlacedState(event);
             break;
     }
 }
 
 void MoveFSM::processStabilityEvent(const StabilityEvent& event) {
-    if (!event.isStable || m_currentState != State::PIECE_PLACED) { return; }
+    if (!event.isStable || m_currentState != MoveFSM::State::PIECE_PLACED) { return; }
 
     if (isAdjustment()) {
         reset();
         return;
     }
 
-    // Build prev/current stable board snapshots by applying observed
-    // emptied/occupied sets onto the last known stable board.
-    std::array<Occupancy, 64> prev = m_lastStableBoard;
-    std::array<Occupancy, 64> curr = prev;
+    // Use the stable snapshots provided by the perception engine. The
+    // StabilityEvent contains both the previous and current stable board
+    // snapshots so the FSM doesn't need to keep its own copy.
+    const auto &prev = event.prev;
+    const auto &curr = event.curr;
 
-    auto toIndex = [](SquareCoordinates s) { return static_cast<int>(s); };
-
-    for (const auto& sq : m_emptiedSquares) {
-        curr[toIndex(sq)] = Occupancy::EMPTY;
-    }
-    for (const auto& sq : m_occupiedSquares) {
-        curr[toIndex(sq)] = Occupancy::OCCUPIED;
-    }
-
-    // Attempt to classify the board diff into a concrete move. If we can
-    // classify, populate source/destination and transition to CONFIRMED_MOVE
-    // so the callback is emitted from the canonical transition path.
+    // Attempt to classify the board diff into a concrete move.
     auto maybeMove = classifyBoardDiff(prev, curr);
     if (maybeMove.has_value()) {
         // Build the MoveConfirmedEvent here and emit callback immediately
@@ -60,9 +50,10 @@ void MoveFSM::processStabilityEvent(const StabilityEvent& event) {
 
         m_moveConfirmedCallback(ev);
 
-        // update stable board and transition; transition will perform reset
-        m_lastStableBoard = curr;
-        transitionToState(State::CONFIRMED_MOVE);
+        // Transition to confirmed; perception already provided the stable
+        // snapshot so we don't store it locally. transition will perform
+        // reset which clears temporary sets.
+        transitionToState(MoveFSM::State::CONFIRMED_MOVE);
         return;
     }
 
@@ -71,7 +62,7 @@ void MoveFSM::processStabilityEvent(const StabilityEvent& event) {
 }
 
 void MoveFSM::reset() {
-    m_currentState = State::IDLE;
+    m_currentState = MoveFSM::State::IDLE;
     m_sourceSquare.reset();
     m_destinationSquare.reset();
     m_emptiedSquares.clear();
@@ -79,7 +70,7 @@ void MoveFSM::reset() {
 
 }
 
-State MoveFSM::getCurrentState() const {
+MoveFSM::State MoveFSM::getCurrentState() const {
     return m_currentState;
 
 }
@@ -90,7 +81,7 @@ void MoveFSM::handleIdleState(const MoveEvent& event) {
         // A piece was lifted
         m_emptiedSquares.insert(event.coordinates);
         m_sourceSquare = event.coordinates;
-        transitionToState(State::PIECE_LIFTED);
+    transitionToState(MoveFSM::State::PIECE_LIFTED);
     }
 }
 
@@ -99,7 +90,7 @@ void MoveFSM::handlePieceLiftedState(const MoveEvent& event) {
         // A piece was placed
         m_occupiedSquares.insert(event.coordinates);
         m_destinationSquare = event.coordinates;
-        transitionToState(State::PIECE_PLACED);
+    transitionToState(MoveFSM::State::PIECE_PLACED);
     } else {
         // Another piece was lifted; update source square
         m_emptiedSquares.insert(event.coordinates);
@@ -124,11 +115,11 @@ bool MoveFSM::isAdjustment() const {
            m_sourceSquare.value() == m_destinationSquare.value();
 }
 
-void MoveFSM::transitionToState(State newState) {
+void MoveFSM::transitionToState(MoveFSM::State newState) {
     m_currentState = newState;
-    if (newState == State::IDLE) { reset(); }
+    if (newState == MoveFSM::State::IDLE) { reset(); }
 
-    if (newState == State::CONFIRMED_MOVE) {
+    if (newState == MoveFSM::State::CONFIRMED_MOVE) {
         // Reset state; MoveConfirmedEvent is emitted by the stability path
         // which calls the callback prior to transitioning here.
         reset();
