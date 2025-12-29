@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/StartScreen.qml</file>
+        <file>qml/ManualScreen.qml</file>
+        <file>qml/AutoScreen.qml</file>
     </qresource>
 </RCC>

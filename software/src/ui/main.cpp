@@ -4,16 +4,16 @@
 
 #include "backend.h"
 
-int main(int argc, char *argv[])
+int main()
 {
-    QGuiApplication app(argc, argv);
+    QGuiApplication app();
 
     QQmlApplicationEngine engine;
 
     Backend backend;
     engine.rootContext()->setContextProperty("backend", &backend);
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 

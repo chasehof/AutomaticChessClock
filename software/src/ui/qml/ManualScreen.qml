@@ -42,5 +42,13 @@ ApplicationWindow {
             height: 80
             onClicked: backend.stopTimer()
         }
+
+        // Back Button
+        Button {
+            text: "Back"
+            width: 160
+            height: 60
+            onClicked: StackView.view.pop()
+        }
     }
 }
