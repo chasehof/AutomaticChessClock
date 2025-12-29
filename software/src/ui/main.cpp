@@ -4,9 +4,9 @@
 
 #include "backend.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    QGuiApplication app();
+    QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
 
