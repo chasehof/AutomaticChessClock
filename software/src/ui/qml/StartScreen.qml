@@ -2,8 +2,8 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Item {
-    signal continue1()
-    signal continue2()
+    signal continueManual()
+    signal continueAuto()
 
     Rectangle {
         anchors.fill: parent
