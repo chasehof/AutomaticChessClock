@@ -9,14 +9,14 @@ Item {
         // Timer Display
         Rectangle {
             width: 400
-            height: 120
+            height: 140
             color: "#202020"
             radius: 12
 
             Text {
                 anchors.centerIn: parent
-                text: backend.seconds + " s"
-             color: "white"
+                text: backend.formattedTime
+                color: "white"
                 font.pixelSize: 48
                 font.bold: true
             }

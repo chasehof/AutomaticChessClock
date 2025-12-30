@@ -20,20 +20,19 @@ ApplicationWindow {
             onClicked: backend.startTimer()
         }
 
-        // Center Timer Display
-        Rectangle {
-            width: parent.width - 340
-            height: 80
-            color: "#202020"
-            radius: 10
+ Rectangle {
+                width: 300
+                height: 80
+                color: "#202020"
+                radius: 10
 
-            Text {
-                anchors.centerIn: parent
-                text: backend.seconds + " s"
-                color: "white"
-                font.pixelSize: 32
+                Text {
+                    anchors.centerIn: parent
+                    text: backend.formattedTime
+                    color: "white"
+                    font.pixelSize: 32
+                }
             }
-        }
 
         // Right Button
         Button {

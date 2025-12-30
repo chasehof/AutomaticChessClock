@@ -11,8 +11,14 @@ Item {
 
         Column {
             anchors.centerIn: parent
-            spacing: 30
-
+            spacing: 25
+            SpinBox {
+                   id: timeInput
+                   from: 1
+                   to: 3600
+                   value: 60
+                   width: 200
+            }
             Button {
                 text: "Manual"
                 width: 200
