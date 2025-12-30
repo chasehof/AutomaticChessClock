@@ -1,53 +1,55 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-ApplicationWindow {
-    width: 800
-    height: 480
-    visible: true
-    title: "Qt5 Raspberry Pi UI"
-
-    Row {
+Item {
+    Column {
         anchors.fill: parent
-        anchors.margins: 20
-        spacing: 20
+        spacing: 30
 
-        // Left Button
         Button {
-            text: "Left"
-            width: 150
-            height: 80
-            onClicked: backend.startTimer()
+            text: "Back"
+            width: 120
+            height: 50
+            onClicked: StackView.view.pop()
         }
 
- Rectangle {
-                width: 300
-                height: 80
-                color: "#202020"
-                radius: 10
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 60
+
+            // LEFT SIDE (Timer A)
+            Column {
+                spacing: 10
 
                 Text {
-                    anchors.centerIn: parent
-                    text: backend.formattedTime
-                    color: "white"
-                    font.pixelSize: 32
+                    text: backend.timerA
+                    font.pixelSize: 36
+                }
+
+                Button {
+                    text: "White"
+                    width: 140
+                    height: 60
+                    onClicked: backend.pressLeft()
                 }
             }
 
-        // Right Button
-        Button {
-            text: "Right"
-            width: 150
-            height: 80
-            onClicked: backend.stopTimer()
-        }
+            // RIGHT SIDE (Timer B)
+            Column {
+                spacing: 10
 
-        // Back Button
-        Button {
-            text: "Back"
-            width: 160
-            height: 60
-            onClicked: StackView.view.pop()
+                Text {
+                    text: backend.timerB
+                    font.pixelSize: 36
+                }
+
+                Button {
+                    text: "Black"
+                    width: 140
+                    height: 60
+                    onClicked: backend.pressRight()
+                }
+            }
         }
     }
 }

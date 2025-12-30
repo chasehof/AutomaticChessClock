@@ -7,30 +7,39 @@
 class Backend : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int timeRemaining  READ timeRemaining NOTIFY timeChanged)
-    Q_PROPERTY(QString formattedTime READ formattedTime NOTIFY timeChanged)
+    Q_PROPERTY(QString timerA READ timerA NOTIFY timeChanged)
+    Q_PROPERTY(QString timerB READ timerB NOTIFY timeChanged)
 
 
 public:
     explicit Backend(QObject *parent = nullptr);
     int timeRemaining() const;
-    QString formattedTime() const;
+    
+    QString timerA() const;
+    QString timerB() const;
 
 public slots:
-    void setMaxTime(int seconds);
-    void startTimer();
-    void stopTimer();
+    void setInitialTime(int minutes, int seconds);
 
+    // Button actions
+    void pressLeft();   // stop A, start B
+    void pressRight();  // stop B, start A
 signals:
     void timeChanged();
     void timerFinished();
 
 private slots:
-    void updateTimer();
+    void updateTimerA();
+    void updateTimerB();
 
 private:
-    QTimer m_timer;
-    int m_timeRemaining;
+    QTimer m_timerA;
+    QTimer m_timerB;
+
+    int m_timeA;
+    int m_timeB;
+    
+    QString formatTime(int totalSeconds) const;
 };
 
 #endif // BACKEND_H

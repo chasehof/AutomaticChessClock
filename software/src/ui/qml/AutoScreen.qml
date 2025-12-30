@@ -13,13 +13,15 @@ Item {
             color: "#202020"
             radius: 12
 
-            Text {
-                anchors.centerIn: parent
-                text: backend.formattedTime
-                color: "white"
-                font.pixelSize: 48
-                font.bold: true
-            }
+         Text {
+                    text: backend.timerA
+                    font.pixelSize: 36
+                }
+
+         Text {
+                    text: backend.timerB
+                    font.pixelSize: 36
+                }
         }
 
         // Back Button

@@ -12,25 +12,61 @@ Item {
         Column {
             anchors.centerIn: parent
             spacing: 25
+            
+        Text {
+            text: "Set Timer"
+            font.pixelSize: 24
+        }
+
+        Row {
+            spacing: 10
+
             SpinBox {
-                   id: timeInput
-                   from: 1
-                   to: 3600
-                   value: 60
-                   width: 200
+                id: minutesInput
+                from: 0
+                to: 99
+                value: 1
+                width: 100
+            }
+
+            Text { text: "min" }
+
+            SpinBox {
+                id: secondsInput
+                from: 0
+                to: 59
+                value: 0
+                width: 100
+            }
+
+            Text { text: "sec" }
+        }
+            Button {
+            text: "Start"
+            width: 200
+            height: 70
+            onClicked: {
+                backend.setInitialTime(minutesInput.value, secondsInput.value)
+                showMain()
             }
             Button {
                 text: "Manual"
                 width: 200
                 height: 80
-                onClicked: continueManual()
+                onClicked: {
+                backend.setInitialTime(minutesInput.value, secondsInput.value)
+                continueManual()
+              }
             }
 
             Button {
                 text: "Auto"
                 width: 200
                 height: 80
-                onClicked: continueAuto()
+                onClicked: {
+                backend.setInitialTime(minutesInput.value, secondsInput.value)
+                continueAuto()
+              }
             }
         }
     }
