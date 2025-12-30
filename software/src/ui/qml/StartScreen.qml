@@ -41,14 +41,7 @@ Item {
 
             Text { text: "sec" }
         }
-            Button {
-            text: "Start"
-            width: 200
-            height: 70
-            onClicked: {
-                backend.setInitialTime(minutesInput.value, secondsInput.value)
-                showMain()
-            }
+
             Button {
                 text: "Manual"
                 width: 200
