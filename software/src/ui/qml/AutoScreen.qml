@@ -17,6 +17,7 @@ Item {
                     text: backend.timerA
                     font.pixelSize: 36
                 }
+        spacing: 10
 
          Text {
                     text: backend.timerB
