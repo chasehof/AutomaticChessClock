@@ -21,7 +21,13 @@ namespace ChessClock {
 
         virtual PerceptionState state() const = 0;
 
-    virtual std::vector<PerceptionEvent> pollPerceptionEvents() = 0;
+        /**
+         * Block until there are pending perception events or the engine is stopped.
+         * Implementations should wake this waiter when new events are available.
+         */
+        virtual void waitForEvents() = 0;
+
+        virtual std::vector<PerceptionEvent> pollPerceptionEvents() = 0;
 
         virtual bool isCalibrated() const = 0;
 

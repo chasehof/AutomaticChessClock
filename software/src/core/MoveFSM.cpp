@@ -2,12 +2,14 @@
 #include <array>
 #include <optional>
 #include <algorithm>
+#include "logger/Logger.hpp"
 
 namespace ChessClock {
 
 MoveFSM::MoveFSM(MoveConfirmedCallback callback)
         : m_moveConfirmedCallback(std::move(callback)),
             m_currentState(MoveFSM::State::IDLE) {
+    Logger::info("MoveFSM", "FSM constructed, state=IDLE");
 }
 
 
@@ -49,6 +51,7 @@ void MoveFSM::processStabilityEvent(const StabilityEvent& event) {
         ev.timestamp = std::chrono::steady_clock::now();
 
         m_moveConfirmedCallback(ev);
+    Logger::info("MoveFSM", "Move confirmed from " + std::to_string(static_cast<int>(maybeMove->source)) + " to " + std::to_string(static_cast<int>(maybeMove->destination)));
 
         // Transition to confirmed; perception already provided the stable
         // snapshot so we don't store it locally. transition will perform
@@ -67,6 +70,7 @@ void MoveFSM::reset() {
     m_destinationSquare.reset();
     m_emptiedSquares.clear();
     m_occupiedSquares.clear();
+    Logger::info("MoveFSM", "FSM reset to IDLE");
 
 }
 
@@ -123,6 +127,7 @@ void MoveFSM::transitionToState(MoveFSM::State newState) {
         // Reset state; MoveConfirmedEvent is emitted by the stability path
         // which calls the callback prior to transitioning here.
         reset();
+        Logger::info("MoveFSM", "Transitioned to CONFIRMED_MOVE (reset performed)");
     }
 }
 

@@ -1,4 +1,5 @@
 #include "ClockEngine.hpp"
+#include "logger/Logger.hpp"
 
 namespace ChessClock {
 
@@ -13,6 +14,7 @@ void ClockEngine::start() {
     if (!m_isRunning) {
         m_isRunning = true;
         m_lastUpdateTime = std::chrono::steady_clock::now();
+        Logger::info("ClockEngine", "Clock started");
     }
 }
 
@@ -20,6 +22,7 @@ void ClockEngine::pause() {
     if (m_isRunning) {
         update(); // Update time before pausing
         m_isRunning = false;
+        Logger::info("ClockEngine", "Clock paused");
     }
 }
 
@@ -42,6 +45,7 @@ void ClockEngine::onMoveConfirmed(const MoveConfirmedEvent& event) {
 
     // Apply increment to the player who just moved
     applyIncrement(m_activePlayer);
+    Logger::info("ClockEngine", "Applied increment to player " + std::to_string(static_cast<int>(m_activePlayer)));
 
     // Switch active player
     m_activePlayer = (m_activePlayer == PlayerColor::WHITE) ? PlayerColor::BLACK : PlayerColor::WHITE;
