@@ -34,4 +34,3 @@ Where to look
 License
 - See [LICENSE](LICENSE)
 
-If you want, I can shorten or expand any section, add examples, or include build/run exact binary name.
