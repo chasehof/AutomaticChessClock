@@ -1,35 +1,37 @@
-# Automatic Chess Clock (PoC)
+# Automatic Chess Clock
 
-The Automatic Chess Clock is a proof-of-concept system designed to detect chess moves automatically and switch the active player's timer without requiring physical clock buttons. The goal of the PoC is to validate the feasibility of using computer vision to monitor a chessboard in real time while remaining board-agnostic and non-invasive.
+Automatic Chess clock uses a Raspberry Pi and a camera to detect completed chess moves and automatically switch the active player's timer. It is a proof-of-concept focused on reliable timekeeping and robust move detection (board occupancy only) rather than move legality or piece recognition.
 
-## Features
+Key features
+- Automatic move detection using per-square occupancy changes
+- Deterministic, thread-separated architecture (Vision → FSM → Clock → UI)
+- Accurate timekeeping using a monotonic clock source; supports increments and pauses
+- Configurable stability timeout to tolerate piece adjustments and transient motion
 
-TBD
+Architecture (brief)
+- Vision thread: captures frames and emits occupancy events
+- FSM thread: confirms moves from occupancy events and emits MoveConfirmed
+- Clock thread: maintains player clocks and switches on MoveConfirmed
+- UI thread: displays time and accepts configuration (not authoritative)
 
-## Installation
+Quick start
+- Build (project root):
 
-TBD
+```bash
+./build.sh
+```
 
-## Usage
+- Run the built executable from the `build` directory (or use your usual CMake run step).
 
-TBD
+Configuration
+- Project configuration lives in [software/config/Config.json](software/config/Config.json).
 
-## Architecture
+Where to look
+- Entry point: [software/src/main.cpp](software/src/main.cpp)
+- Core modules: [software/include/core](software/include/core)
+- Vision: [software/include/perception](software/include/perception)
 
-TBD
+License
+- See [LICENSE](LICENSE)
 
-## Hardware
-
-TBD
-
-## Software
-
-TBD
-
-## Contributing
-
-TBD
-
-## License
-
-TBD
+If you want, I can shorten or expand any section, add examples, or include build/run exact binary name.
